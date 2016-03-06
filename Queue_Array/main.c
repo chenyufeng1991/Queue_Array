@@ -22,13 +22,12 @@ static int tail = 0;
 void EnQueue(int value){
 
     //要先判断队列是否已满
-    int next = (tail + 1) % QUEUE_SIZE;
-    if (next == head) {
+    if ((tail + 1) % QUEUE_SIZE == head) {
         printf("队列已满，无法从队尾插入元素\n");
     }else{
 
         queue[tail] = value;
-        tail = next;
+        tail = (tail + 1) % QUEUE_SIZE;
     }
 }
 
@@ -62,7 +61,7 @@ int IsEmpty(){
 //判断队列是否已满
 /**
  *  我这里判断队满的的方法：
- 牺牲一个单元来区分队空和队满，入队时少用一个队列单元。如果数组的大小为Size,那么实际只能存放(Size-1)个元素。
+ 牺牲一个单元来区分队空和队满，入队时少用一个队列单元。如果数组的大小为Size,那么实际只能存放(Size-1)个元素。（这是比较常用的判满的方式）
  *
  */
 int IsFull(){
@@ -95,27 +94,3 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
